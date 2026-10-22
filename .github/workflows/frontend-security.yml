@@ -1,0 +1,24 @@
+name: Frontend security runtime
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: corepack enable
+      - run: corepack pnpm install --frozen-lockfile --ignore-scripts
+      - run: corepack pnpm test:security
+      - run: corepack pnpm exec tsc --noEmit
