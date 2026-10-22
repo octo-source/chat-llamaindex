@@ -32,7 +32,8 @@ You can:
 
 ### Local Development
 
-Requirement: [NodeJS](https://nodejs.org) 18
+Requirements: [Node.js](https://nodejs.org) 22.23.4 or newer in the 22.x line, or 24.22.1 or newer in the 24.x line and pnpm 8.15.9.
+Keep optional dependencies enabled: Sharp uses platform-specific native packages.
 
 - Clone the repository
 
@@ -52,7 +53,8 @@ Edit environment variables in `.env.development.local`.
 - Run the dev server
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
+pnpm test:security
 pnpm dev
 ```
 
